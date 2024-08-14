@@ -1,3 +1,19 @@
+/* Heltec Automation send communication test example
+ *
+ * Function:
+ * 1. Send data from a esp32 device over hardware 
+ *  
+ * Description:
+ * 
+ * HelTec AutoMation, Chengdu, China
+ * 成都惠利特自动化科技有限公司
+ * www.heltec.org
+ *
+ * this project also realess in GitHub:
+ * https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series
+ * */
+
+
 /*
 	Medidor de batimentos cardiacos 
         Rodrigo Feliciano - http://www.pakequis.com.br
@@ -6,6 +22,7 @@
         Pulse Sensor Amped 1.4  by Joel Murphy and Yury Gitman   http://www.pulsesensor.com
 	https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino/blob/master/README.md  
 */
+
 
 
 #include "LoRaWan_APP.h"
