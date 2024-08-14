@@ -1,3 +1,13 @@
+/*
+	Medidor de batimentos cardiacos 
+        Rodrigo Feliciano - http://www.pakequis.com.br
+	
+	Com o código original: 
+        Pulse Sensor Amped 1.4  by Joel Murphy and Yury Gitman   http://www.pulsesensor.com
+	https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino/blob/master/README.md  
+*/
+
+
 #include "LoRaWan_APP.h"
 #include "Arduino.h"
 
