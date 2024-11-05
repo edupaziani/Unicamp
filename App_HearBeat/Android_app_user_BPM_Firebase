@@ -14,10 +14,11 @@
 //definição dos parâmetros úteis para a conexão
 #define WIFI_SSID "AP 121"                                                           //  ----> declaração do nome da rede a conectar
 #define WIFI_PASSWORD "a022e023"                                                        //  ----> declaração da senha da rede a conectar
-#define API_KEY "AIzaSyCpnLjED5x4LMH0xocdP0habrW8d9rJp_k"                               //  ----> conexão da API KEY da Firebase com a esp  
-#define DATABASE_URL "https://heartbeatsensor-f3741-default-rtdb.firebaseio.com/"       //  ----> definição de qual endereço a esp deve enviar os dados
+#define API_KEY "AIzaSyAXNCVW_U-Gk9H1kXa73NvZbtSS3v-Rffs"                               //  ----> conexão da API KEY da Firebase com a esp  
+#define DATABASE_URL "https://final-58b79-default-rtdb.firebaseio.com/"       //  ----> definição de qual endereço a esp deve enviar os dados
 // Substitua pelo ID real do usuário ao qual você deseja salvar os dados
 #define USER_ID "djtfjKDBhIPIKkX6ZtZf2Yh9hgJ3" 
+
 //  Variables
 const int PulseWire = 19;       // PulseSensor PURPLE WIRE connected to ANALOG PIN 0 -- No caso o pino GPIO19 vai ser utilizado
 //const int LED = LED_BUILTIN;          // The on-board Arduino LED, close to PIN 13.
@@ -61,11 +62,12 @@ Serial.println("");
 //conexão com a Firebase
 config.api_key = API_KEY;
 config.database_url = DATABASE_URL;
+
 if(Firebase.signUp(&config, &auth, "", "")){    //As duas últimas strings vazias são utilizadas para o caso de usar usuário anônimo no Firebase
-    Serial.println("signup OK");
+    Serial.println("Autenticação anônima realizada com sucesso.");//("signup OK");
     signupOK = true;
   }else{
-    Serial.printf("%s\n", config.signer.signupError.message.c_str());
+    Serial.printf("Erro na autenticação anônima: %s\n", config.signer.signupError.message.c_str());//("%s\n", config.signer.signupError.message.c_str());
   }
 
   config.token_status_callback = tokenStatusCallback;
@@ -103,7 +105,7 @@ if (pulseSensor.sawStartOfBeat()) {            // Constantly test to see if "a b
     voltage = (float)analogReadMilliVolts(PulseWire)/1000;    //aqui a leitura da voltagem nesse pino está sendo feita e salvada
   }
   // Salva bpm_data no caminho específico do usuário
-  String bpmPath = "Users/" + String(USER_ID) + "/sensor_data/bpm_data";
+  String bpmPath = "SharedData/" + String(USER_ID) + "/sensor_data/bpm_data";
   if(Firebase.RTDB.setInt(&fbdo, bpmPath.c_str(), myBPM)){
     Serial.println();
     Serial.print(myBPM);
@@ -114,7 +116,7 @@ if (pulseSensor.sawStartOfBeat()) {            // Constantly test to see if "a b
   }
 
   // Salva voltage no caminho específico do usuário
-  String voltagePath = "Users/" + String(USER_ID) + "/sensor_data/voltage";
+  String voltagePath = "SharedData/" + String(USER_ID) + "/sensor_data/voltage";
   if(Firebase.RTDB.setFloat(&fbdo, voltagePath.c_str(), voltage)){
     Serial.println();
     Serial.print(voltage);
